@@ -3318,6 +3318,11 @@ def l1_loss(
 
     See :class:`~torch.nn.L1Loss` for details.
     """
+
+    if reduction == 'sum':
+        raise ValueError("Custom message: Sum reduction mode is not allowed.")
+
+    
     if has_torch_function_variadic(input, target):
         return handle_torch_function(
             l1_loss, (input, target), input, target, size_average=size_average, reduce=reduce, reduction=reduction
